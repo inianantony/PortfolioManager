@@ -8,5 +8,7 @@ namespace PortfolioManager.Models.ViewModels
         public Summary Summary { get; set; }
         public List<ProfitLossReportViewModel> ProfitLosses { get; set; }
         public List<EquityTransaction> EquityTransactions { get; set; }
+        public SortedDictionary<string, decimal> Last10DaysNetWorth { get; set; }
+        public Dictionary<string, decimal> TickerContribution { get; set; }
     }
 }

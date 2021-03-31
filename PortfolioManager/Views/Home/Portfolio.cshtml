@@ -1,4 +1,5 @@
-﻿@model PortfolioManager.Models.ViewModels.PortfolioPageViewModel
+﻿@using Newtonsoft.Json
+@model PortfolioManager.Models.ViewModels.PortfolioPageViewModel
 @{
     Layout = null;
 }
@@ -28,240 +29,238 @@
 
 <body id="page-top">
 
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
-                <div class="sidebar-brand-icon">
-                    <i class="fas fa-wallet"></i>
+<!-- Page Wrapper -->
+<div id="wrapper">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-wallet"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">
+            Portfolio Manager <sup><i class="fas fa-globe-asia"></i></sup>
+        </div>
+    </a>
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item active">
+        <a class="nav-link" href="/">
+            <i class="fas fa-user-friends"></i>
+            <span>View Clients</span>
+        </a>
+    </li>
+    <hr class="sidebar-divider">
+</ul>
+<div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+
+        <div class="container-fluid">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
+                <h1 class="h3 mb-0 text-gray-800">@Model.Client.Salutation @{@Model.Client.ClientName}'s Portfolio</h1>
+            </div>
+
+            <div class="row">
+
+                <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Net Worth
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$@Model.Summary.NetWorth.ToString("N")</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="sidebar-brand-text mx-3">
-                    Portfolio Manager <sup><i class="fas fa-globe-asia"></i></sup>
+
+                <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Assets
+                                    </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$@Model.Summary.Assets.ToString("N")</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-coins fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </a>
-            <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">
-                    <i class="fas fa-user-friends"></i>
-                    <span>View Clients</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider">
-        </ul>
-        <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">
 
-                <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4 mt-4">
-                        <h1 class="h3 mb-0 text-gray-800">@Model.Client.Salutation @{@Model.Client.ClientName}'s Portfolio</h1>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Net Worth
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$@Model.Summary.NetWorth.ToString("N")</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
+                <div class="col-xl-4 col-md-6 mb-4">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Liability
                                     </div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">$@Model.Summary.Liability.ToString("N")</div>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Assets
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$@Model.Summary.Assets.ToString("N")</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-coins fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-4 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Liability
-                                            </div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$@Model.Summary.Liability.ToString("N")</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12 mb-2">
-
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <div class="d-sm-flex align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">P&L Report</h6>
-                                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                            <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="pl-table" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ticker</th>
-                                                    <th>As Of Date</th>
-                                                    <th>Cost</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                    <th>MarketValue</th>
-                                                    <th>Prev. Close</th>
-                                                    <th>Daily P&L</th>
-                                                    <th>Inception P&L</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var pl in @Model.ProfitLosses)
-                                                {
-                                                    <tr>
-                                                        <td>@pl.Ticker</td>
-                                                        <td>@pl.AsOfDate</td>
-                                                        <td>$@pl.Cost.ToString("N")</td>
-                                                        <td>@pl.Quantity.ToString("N")</td>
-                                                        <td>$@pl.Price.ToString("N")</td>
-                                                        <td>$@pl.MarketValue.ToString("N")</td>
-                                                        <td>$@pl.PrevPrice.ToString("N")</td>
-                                                        <td>$@pl.DailyPandL.ToString("N")</td>
-                                                        <td>$@pl.InceptionPandL.ToString("N")</td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-xl-12 mb-2">
-
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Trade Transactions</h6>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered" id="transactions-table" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ticker</th>
-                                                    <th>Trade Date</th>
-                                                    <th>Buy/Sell</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                    <th>Cost</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach (var transaction in @Model.EquityTransactions)
-                                                {
-                                                    <tr>
-                                                        <td>@transaction.Ticker</td>
-                                                        <td>@transaction.TradeDate.ToString("dd/MM/yyyy")</td>
-                                                        <td>@transaction.Action</td>
-                                                        <td>@transaction.Quantity.ToString("N")</td>
-                                                        <td>$@transaction.Price.ToString("N")</td>
-                                                        <td>$@transaction.Cost.ToString("N")</td>
-                                                    </tr>
-                                                }
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-hand-holding-usd fa-2x text-gray-300"></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Portfolio Manager 2021</span>
+
+            <div class="row">
+
+                <div class="col-xl-8 col-lg-7">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Equity Earnings Overview</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </footer>
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Ticker Contribution</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myPieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 mb-2">
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <div class="d-sm-flex align-items-center justify-content-between">
+                                <h6 class="m-0 font-weight-bold text-primary">P&L Report</h6>
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <i class="fas fa-download fa-sm text-white-50"></i> Generate Report
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="pl-table" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Ticker</th>
+                                        <th>As Of Date</th>
+                                        <th>Cost</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>MarketValue</th>
+                                        <th>Prev. Close</th>
+                                        <th>Daily P&L</th>
+                                        <th>Inception P&L</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var pl in @Model.ProfitLosses)
+                                    {
+                                        <tr>
+                                            <td>@pl.Ticker</td>
+                                            <td>@pl.AsOfDate</td>
+                                            <td>$@pl.Cost.ToString("N")</td>
+                                            <td>@pl.Quantity.ToString("N")</td>
+                                            <td>$@pl.Price.ToString("N")</td>
+                                            <td>$@pl.MarketValue.ToString("N")</td>
+                                            <td>$@pl.PrevPrice.ToString("N")</td>
+                                            <td>$@pl.DailyPandL.ToString("N")</td>
+                                            <td>$@pl.InceptionPandL.ToString("N")</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-12 mb-2">
+
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Trade Transactions</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="transactions-table" width="100%" cellspacing="0">
+                                    <thead>
+                                    <tr>
+                                        <th>Ticker</th>
+                                        <th>Trade Date</th>
+                                        <th>Buy/Sell</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Cost</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach (var transaction in @Model.EquityTransactions)
+                                    {
+                                        <tr>
+                                            <td>@transaction.Ticker</td>
+                                            <td>@transaction.TradeDate.ToString("dd/MM/yyyy")</td>
+                                            <td>@transaction.Action</td>
+                                            <td>@transaction.Quantity.ToString("N")</td>
+                                            <td>$@transaction.Price.ToString("N")</td>
+                                            <td>$@transaction.Cost.ToString("N")</td>
+                                        </tr>
+                                    }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Portfolio Manager 2021</span>
+            </div>
+        </div>
+    </footer>
+</div>
+</div>
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
 
-    <script src="~/vendor/jquery/jquery.min.js"></script>
-    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/vendor/chart.js/Chart.min.js"></script>
-    <script src="~/js/poftfolio_mgmt.js"></script>
-    <script src="~/js/demo/chart-area-demo.js"></script>
-    <script src="~/js/demo/chart-pie-demo.js"></script>
+<script src="~/vendor/jquery/jquery.min.js"></script>
+<script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="~/vendor/chart.js/Chart.min.js"></script>
+<script src="~/js/poftfolio_mgmt.js"></script>
+<script src="~/js/demo/chart-area-demo.js"></script>
+<script src="~/js/demo/chart-pie-demo.js"></script>
+<script>
+    var labels = @Html.Raw(JsonConvert.SerializeObject(Model.Last10DaysNetWorth.Keys));
+    var data = @Html.Raw(JsonConvert.SerializeObject(Model.Last10DaysNetWorth.Values));
+    drawLineChart(labels, data);
+
+    var pieChartLabels = @Html.Raw(JsonConvert.SerializeObject(Model.TickerContribution.Keys));
+    var pieChartData = @Html.Raw(JsonConvert.SerializeObject(Model.TickerContribution.Values));
+    drawPieChart(pieChartLabels, pieChartData);
+</script>
 </body>
 
 </html>
