@@ -13,10 +13,10 @@ namespace PortfolioManager.Models
 
         public LatestTwoTickerPrices GetLatestTwoTickerPrices()
         {
-            return GetTwoTickerPricesByRange(0, 1);
+            return GetTopTickerPricesByRange(0, 1);
         }
 
-        public LatestTwoTickerPrices GetTwoTickerPricesByRange(int from, int to)
+        public LatestTwoTickerPrices GetTopTickerPricesByRange(int from, int to)
         {
             if(from == to) throw new Exception("From and To cannot be same");
             var dates = TimeSeriesDaily.Keys.OrderByDescending(a => a.Date).ToList();

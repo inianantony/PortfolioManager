@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using PortfolioManager.Cache;
 using PortfolioManager.Models;
-using PortfolioManager.Models.ViewModels;
 using Serilog;
 
 namespace PortfolioManager.Services
@@ -11,7 +10,7 @@ namespace PortfolioManager.Services
     public class NetWorthReportBuilder
     {
         private readonly IEquitiesPriceCache _cache;
-        private int _NetWorthRange = 10;
+        private readonly int _netWorthRange = 10;
 
         public NetWorthReportBuilder(IEquitiesPriceCache cache)
         {
@@ -22,40 +21,39 @@ namespace PortfolioManager.Services
         {
             try
             {
-                var ll = new List<ProfitLossReport>();
-                int count = 0;
-                while (count < _NetWorthRange)
+                var reportList = new List<ProfitLossReport>();
+                var count = 0;
+                while (count < _netWorthRange)
                 {
                     foreach (var eachTickerTransaction in transactionGroups)
                     {
                         var tickerId = eachTickerTransaction.Key;
-
+                        var equityTransactions = eachTickerTransaction.Value;
 
                         var tickerPrices = _cache.GetEquityPrice(tickerId);
-                        var latest2Prices = tickerPrices.GetTwoTickerPricesByRange(count, count + 1);
+                        var latest2Prices = tickerPrices.GetTopTickerPricesByRange(count, count + 1);
 
-                        var transactions = eachTickerTransaction.Value.Where(a => a.TradeDate <= latest2Prices.LatestDate).ToList();
+                        var transactions = equityTransactions.Where(a => a.TradeDate <= latest2Prices.LatestDate).ToList();
 
-                        var quantity = eachTickerTransaction.Value.Sum(a => a.NettQuantity);
+                        var quantity = equityTransactions.Sum(a => a.NettQuantity);
                         if (quantity <= 0) continue;
 
-                        ll.Add(new ProfitLossReport(tickerId, transactions, latest2Prices));
+                        reportList.Add(new ProfitLossReport(tickerId, transactions, latest2Prices));
                     }
 
                     count++;
                 }
 
-                var groupNetWorthByDate = ll.GroupBy(a => a.AsOfDate).ToDictionary(a =>
+                var groupNetWorthByDate = reportList.GroupBy(a => a.AsOfDate).ToDictionary(a =>
                         a.Key,
                     b => b.Sum(c => c.MarketValue));
                 var tenDaysNetWorth = new SortedDictionary<string, decimal>(groupNetWorthByDate);
                 return tenDaysNetWorth;
             }
-            catch (HttpRequestException e)
+            catch (Exception e)
             {
                 Log.Error(e, "NetWorthReportBuilder");
             }
-
 
             return new SortedDictionary<string, decimal>();
         }

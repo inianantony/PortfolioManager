@@ -45,7 +45,7 @@ namespace PortfolioManagerTests.Models
                PreviousDate = _secondDate
             };
 
-            _equityPrices.GetTwoTickerPricesByRange(0,1).Should()
+            _equityPrices.GetTopTickerPricesByRange(0,1).Should()
                 .BeEquivalentTo(expected);
         }
 
@@ -54,7 +54,7 @@ namespace PortfolioManagerTests.Models
         {
             var ex = Assert.Throws<Exception>(() =>
             {
-                _equityPrices.GetTwoTickerPricesByRange(0, 0);
+                _equityPrices.GetTopTickerPricesByRange(0, 0);
             });
 
             Assert.AreEqual("From and To cannot be same", ex.Message);
@@ -71,7 +71,7 @@ namespace PortfolioManagerTests.Models
                 PreviousDate = _thirdDate
             };
 
-            _equityPrices.GetTwoTickerPricesByRange(1, 2).Should()
+            _equityPrices.GetTopTickerPricesByRange(1, 2).Should()
                 .BeEquivalentTo(expected);
         }
     }
