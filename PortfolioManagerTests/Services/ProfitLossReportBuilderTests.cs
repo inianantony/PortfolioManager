@@ -10,7 +10,7 @@ using PortfolioManager.Services;
 namespace PortfolioManagerTests.Services
 {
     [TestFixture]
-    class NetWorthReportBuilderTests
+    class ProfitLossReportBuilderTests
     {
         private EquityPrices _equityPrices;
         private Quote _firstQuote;
@@ -57,9 +57,9 @@ namespace PortfolioManagerTests.Services
         }
 
         [Test]
-        public void GetNetWorthHistory()
+        public void GetProfitLossReport_Tests()
         {
-            var reportBuilder = new NetWorthReportBuilder(_cacheMock.Object);
+            var reportBuilder = new ProfitLossReportBuilder(_cacheMock.Object);
 
             var transactionGroups = new Dictionary<string, List<EquityTransaction>>
             {
@@ -91,24 +91,26 @@ namespace PortfolioManagerTests.Services
                 }
             };
 
-            var netWorthHistory = reportBuilder.GetNetWorthHistory(transactionGroups);
+            var profitLossReport = reportBuilder.GetProfitLossReport(transactionGroups);
 
-            var expected = new SortedDictionary<string,decimal>
+            var expected = new List<object>
             {
-                {"29/03/2021",500},
-                {"28/03/2021",360},
-                {"27/03/2021",160},
-                {"26/03/2021",0},
-                {"25/03/2021",0},
-                {"24/03/2021",0},
-                {"23/03/2021",0},
-                {"22/03/2021",0},
-                {"21/03/2021",0},
-                {"20/03/2021",0},
+                new
+                {
+                    AsOfDate = "29/03/2021",
+                    Cost = 180,
+                    DailyPandL = 50M,
+                    InceptionPandL = 320M,
+                    MarketValue = 500M,
+                    PrevPrice = 9M,
+                    Price = 10M,
+                    Quantity = 50,
+                    Ticker = "GOOG"
+                }
             };
 
-            netWorthHistory.Should().NotBeEmpty()
-                .And.HaveCount(10)
+            profitLossReport.Should().NotBeEmpty()
+                .And.HaveCount(1)
                 .And.BeEquivalentTo(expected);
         }
     }

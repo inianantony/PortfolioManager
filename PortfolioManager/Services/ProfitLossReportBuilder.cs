@@ -3,7 +3,6 @@ using System.Linq;
 using System.Net.Http;
 using PortfolioManager.Cache;
 using PortfolioManager.Models;
-using PortfolioManager.Models.ViewModels;
 using Serilog;
 
 namespace PortfolioManager.Services
