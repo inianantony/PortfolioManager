@@ -52,6 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\EquityTransactionsTests.cs" />
+    <Compile Include="Models\EquityTransactionTests.cs" />
     <Compile Include="Models\LatestTwoTickerPricesTests.cs" />
     <Compile Include="Models\ProfitLossReportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
