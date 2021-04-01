@@ -16,7 +16,7 @@ namespace PortfolioManager.Models
 
         public List<EquityTransaction> GetOrderedTransaction()
         {
-            return this.Transactions.OrderByDescending(a => a.TradeDate).ToList();
+            return Transactions.OrderByDescending(a => a.TradeDate).ToList();
         }
     }
 }
