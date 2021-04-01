@@ -5,12 +5,12 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioManager", "PortfolioManager\PortfolioManager.csproj", "{19E8F8B2-7778-4179-8D65-1EE3CBFD7D3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioManager.Tests", "PortfolioManager.Tests\PortfolioManager.Tests.csproj", "{AC23E66A-DB4B-49F5-8838-9DD78BC8011F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{653BAF60-4A64-4DF1-A91F-02E37502DF8F}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PortfolioManagerTests", "PortfolioManagerTests\PortfolioManagerTests.csproj", "{294C012D-3369-477C-BF8C-84C7A139F8BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,10 +22,10 @@ Global
 		{19E8F8B2-7778-4179-8D65-1EE3CBFD7D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19E8F8B2-7778-4179-8D65-1EE3CBFD7D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19E8F8B2-7778-4179-8D65-1EE3CBFD7D3A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC23E66A-DB4B-49F5-8838-9DD78BC8011F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC23E66A-DB4B-49F5-8838-9DD78BC8011F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC23E66A-DB4B-49F5-8838-9DD78BC8011F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC23E66A-DB4B-49F5-8838-9DD78BC8011F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{294C012D-3369-477C-BF8C-84C7A139F8BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{294C012D-3369-477C-BF8C-84C7A139F8BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{294C012D-3369-477C-BF8C-84C7A139F8BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{294C012D-3369-477C-BF8C-84C7A139F8BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
