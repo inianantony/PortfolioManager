@@ -41,3 +41,17 @@
 - `Models` folder hosts the test of models
 - The services tests are present in `Services` folder
 - More tests will be added based on the similar structure of main project
+
+
+## How to run the project?
+
+- Use visual studio 2019 or higher to open the app
+- Restore the nuget packages by right clicking the solution file and choose the menu `Restore Nuget Packages`
+- Build the solution
+- Click `F5` to run the project
+- The default browser opens with the app running in debugging mode backed up by IIS Express
+
+## How to run the tests?
+
+- Use reshrper to run the tests in Visual studio 
+- Hit `Ctrl + U` + `Ctrl + L` to run all the tests in the solution
