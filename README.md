@@ -22,6 +22,7 @@
 - The test runner choosen is `NUnit`
 - `Autofac` is used for IOC
 - Logging is done using `Serilog`
+- The application calls the REST service to get the stock prices during application start
 
 ## Project Structure
 
