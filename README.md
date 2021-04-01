@@ -4,17 +4,17 @@
 
 - View the list of Clients
 - View Portfolio of individual client
-    - High level summary of net worth, asset and liabilities
+    - High level summary of net worth, assets worth and liabilities
     - A graph showing the net asset growth over the last 10 days
-    - A chart showing the net asset contribution from each asset entity
-    - Profit and Loss calculation from equity
+    - A chart showing the net asset contribution from each equity
+    - Equity's Profit and Loss calculation
     - List of equity transactions made by the client
     - Download the profit and loss report as CSV file
 
 ## Architecture
 
 - The backend is built using `.net framework 4.8 MVC`
-- The app is architectured usind `DDD` in mind
+- The app is architectured using `Domain Centric Design` in mind
 - Thers is `no authentication` feature added to make the app simple
 - The web layer is using `Razor` syntax for simplicity
 - The app uses `file based SQL server` database and the app uses `dapper` as ORM
@@ -42,10 +42,9 @@
 - The services tests are present in `Services` folder
 - More tests will be added based on the similar structure of main project
 
-
 ## How to run the project?
 
-- Use visual studio 2019 or higher to open the app
+- Use visual studio 2019 to open the app
 - Restore the nuget packages by right clicking the solution file and choose the menu `Restore Nuget Packages`
 - Build the solution
 - Click `F5` to run the project
