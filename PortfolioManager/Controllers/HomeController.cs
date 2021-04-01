@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Mvc;
@@ -8,13 +7,18 @@ using PortfolioManager.Cache;
 using PortfolioManager.Models;
 using PortfolioManager.Models.ViewModels;
 using PortfolioManager.Repository;
+using Serilog;
 
 namespace PortfolioManager.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IPortfolioRepository _portfolioRepository = new PortfolioRepository(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
+        private readonly IPortfolioRepository _portfolioRepository;
 
+        public HomeController(IPortfolioRepository portfolioRepository)
+        {
+            _portfolioRepository = portfolioRepository;
+        }
         public ActionResult Index()
         {
             var clients = _portfolioRepository.GetAllClients();
@@ -59,6 +63,7 @@ namespace PortfolioManager.Controllers
             }
             catch (HttpRequestException e)
             {
+                Log.Error(e, "HomeController");
             }
 
             return ll;
@@ -70,7 +75,7 @@ namespace PortfolioManager.Controllers
             {
                 var ll = new List<ProfitLossReportViewModel>();
                 int count = 0;
-                while (count<10)
+                while (count < 10)
                 {
                     var groupBy = equityTransactions.GroupBy(a => a.Ticker);
                     var transactionGroups = groupBy.ToDictionary(a => a.Key, b => b.ToList());
@@ -110,7 +115,7 @@ namespace PortfolioManager.Controllers
             var client = _portfolioRepository.GetClientById(id);
             var transactions = _portfolioRepository.GetEquityTransactions(id);
             var plReport = NewMethod(transactions);
-            var last10Days = new SortedDictionary<string,decimal>(NewMethod1(transactions));
+            var last10Days = new SortedDictionary<string, decimal>(NewMethod1(transactions));
             var summary = new Summary
             {
                 NetWorth = plReport.Sum(a => a.MarketValue),
@@ -125,7 +130,7 @@ namespace PortfolioManager.Controllers
                 Client = client,
                 Summary = summary,
                 ProfitLosses = plReport,
-                EquityTransactions = transactions.OrderByDescending(a=>a.TradeDate).ToList(),
+                EquityTransactions = transactions.OrderByDescending(a => a.TradeDate).ToList(),
                 Last10DaysNetWorth = last10Days,
                 TickerContribution = tickerContribution
             };
