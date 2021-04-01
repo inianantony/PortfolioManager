@@ -2,7 +2,6 @@
 using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
-using PortfolioManager.Controllers;
 using PortfolioManager.Models;
 
 namespace PortfolioManager.Repository
@@ -20,7 +19,7 @@ namespace PortfolioManager.Repository
         {
             using (var conn = new SqlConnection(_connectionString))
             {
-                return conn.Query<Client>("Select * From Clients").ToList();
+                return conn.Query<Client>("Select ClientId,ClientName,Salutation,Currency From Clients").ToList();
             }
         }
 
@@ -28,15 +27,22 @@ namespace PortfolioManager.Repository
         {
             using (var conn = new SqlConnection(_connectionString))
             {
-                return conn.Query<Client>("Select * From Clients WHERE ClientId = @ClientId", new { clientId }).First();
+                return conn.Query<Client>("Select ClientId,ClientName,Salutation,Currency From Clients WHERE ClientId = @ClientId", new { clientId }).First();
             }
         }
 
-        public List<EquityTransaction> GetEquityTransactions(int clientId)
+        public EquityTransactions GetEquityTransactions(int clientId)
         {
             using (var conn = new SqlConnection(_connectionString))
             {
-                return conn.Query<EquityTransaction>("Select * From EquityTransactions WHERE ClientId = @ClientId", new { clientId }).ToList();
+                return new EquityTransactions
+                {
+                    Transactions = conn
+                        .Query<EquityTransaction>(
+                            "Select ClientId,Ticker,TradeDate,Action,Quantity,Price From EquityTransactions WHERE ClientId = @ClientId",
+                            new { clientId }).ToList()
+                };
+
             }
         }
     }

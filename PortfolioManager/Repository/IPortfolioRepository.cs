@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using PortfolioManager.Controllers;
 using PortfolioManager.Models;
 
 namespace PortfolioManager.Repository
@@ -8,6 +7,6 @@ namespace PortfolioManager.Repository
     {
         List<Client> GetAllClients();
         Client GetClientById(int clientId);
-        List<EquityTransaction> GetEquityTransactions(int clientId);
+        EquityTransactions GetEquityTransactions(int clientId);
     }
 }
