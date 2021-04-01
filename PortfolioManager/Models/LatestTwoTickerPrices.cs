@@ -9,9 +9,6 @@ namespace PortfolioManager.Models
         public Quote LatestQuote { get; set; }
         public Quote PreviousQuote { get; set; }
 
-        public decimal LatestClosingPrice => LatestQuote.Close;
-        public decimal PreviousClosingPrice => PreviousQuote.Close;
-
         public decimal PreviousPrice => PreviousQuote.Close;
 
         public decimal LatestPrice => LatestQuote.Close;

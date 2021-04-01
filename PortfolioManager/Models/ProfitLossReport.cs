@@ -22,9 +22,9 @@ namespace PortfolioManager.Models
         public decimal Price => _latest2Prices.LatestPrice;
         public decimal PrevPrice => _latest2Prices.PreviousPrice;
         public decimal Cost => _transactions.Sum(a => a.Cost);
-        public decimal MarketValue => _latest2Prices.LatestClosingPrice * Quantity;
+        public decimal MarketValue => _latest2Prices.LatestPrice * Quantity;
 
-        public decimal DailyPandL => (_latest2Prices.LatestClosingPrice - _latest2Prices.PreviousClosingPrice) * Quantity;
+        public decimal DailyPandL => (_latest2Prices.LatestPrice - _latest2Prices.PreviousPrice) * Quantity;
         public decimal InceptionPandL => MarketValue - Cost;
     }
 }

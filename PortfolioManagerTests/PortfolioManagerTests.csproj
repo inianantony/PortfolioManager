@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\LatestTwoTickerPricesTests.cs" />
     <Compile Include="Models\ProfitLossReportTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
