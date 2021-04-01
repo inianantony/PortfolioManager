@@ -12,7 +12,7 @@ namespace PortfolioManager.Cache
 {
     public class EquitiesPriceCache : IEquitiesPriceCache
     {
-        private static readonly List<string> SupportedEquities = new List<string> { "GOOG", "MSFT" };
+        private static readonly List<string> SupportedEquities = new List<string> { "GOOG", "MSFT", "IBM" };
         private static readonly string ApiKey = ConfigurationManager.AppSettings["APIKey"];
         public static Dictionary<string, EquityPrices> EquityPrices { get; private set; }
 
