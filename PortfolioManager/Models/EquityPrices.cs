@@ -18,13 +18,13 @@ namespace PortfolioManager.Models
 
         public LatestTwoTickerPrices GetTwoTickerPricesByRange(int from, int to)
         {
-            var priceList = this;
-            var dates = priceList.TimeSeriesDaily.Keys.OrderByDescending(a => a.Date).ToList();
+            if(from == to) throw new Exception("From and To cannot be same");
+            var dates = TimeSeriesDaily.Keys.OrderByDescending(a => a.Date).ToList();
             var latestDate = dates.Skip(from).Take(to).First();
             var previousClosingDate = dates.Skip(from + 1).Take(to + 1).First();
 
-            var first = priceList.TimeSeriesDaily[latestDate];
-            var previous = priceList.TimeSeriesDaily[previousClosingDate];
+            var first = TimeSeriesDaily[latestDate];
+            var previous = TimeSeriesDaily[previousClosingDate];
 
             var latest2Prices = new LatestTwoTickerPrices
             {

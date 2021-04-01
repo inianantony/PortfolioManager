@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\EquityPricesTest.cs" />
     <Compile Include="Models\EquityTransactionsTests.cs" />
     <Compile Include="Models\EquityTransactionTests.cs" />
     <Compile Include="Models\LatestTwoTickerPricesTests.cs" />
