@@ -36,3 +36,8 @@
 - The `Controllers` and `Views` follow the same convention based on the MVC concept
 - `Cache` folders holds the cache of equity prices
 
+### PortfolioManagerTests
+
+- `Models` folder hosts the test of models
+- The services tests are present in `Services` folder
+- More tests will be added based on the similar structure of main project
